@@ -1,0 +1,14 @@
+digraph {
+	Atelier [label=Atelier color="#f00000" fillcolor="#f00000" fontcolor=white style=filled]
+	"Contrôle qualité" [label="Contrôle qualité" color="#00f000" fillcolor="#00f000" fontcolor=white style=filled]
+	"Entrepôt" [label="Entrepôt" color="#0000f0" fillcolor="#0000f0" fontcolor=white style=filled]
+	Vendu [label=Vendu color=black fillcolor=black fontcolor=white style=filled]
+	Atelier -> Atelier [label=0.15 color=red]
+	Atelier -> "Contrôle qualité" [label=0.85 color=red]
+	"Contrôle qualité" -> Atelier [label=0.05 color=orange]
+	"Contrôle qualité" -> "Entrepôt" [label=0.95 color=red]
+	"Entrepôt" -> "Contrôle qualité" [label=0.01 color=orange]
+	"Entrepôt" -> "Entrepôt" [label=0.9 color=red]
+	"Entrepôt" -> Vendu [label=0.09 color=orange]
+	Vendu -> Vendu [label=1.0 color=red]
+}

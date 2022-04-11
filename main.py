@@ -6,11 +6,14 @@ import graphviz as g
 from Probas.probas import algo_etude_probas
 from Stats.stats import algo_etude_stats
 import os
+import pydot
+
+os.environ["PATH"] += "./bin"
 
 couleurs : list[str] = ["#f00000", "#00f000", "#0000f0", "black", "turquoise", "sienna", "grey", "red", "green", "blue", "black", "turquoise", "sienna", "grey"]
 
 # Liste qui contient le nom de tous les datasets
-liste_dataset : list[str] = os.listdir("C:/Users/Favrelle/PycharmProjects/chaineMarkov/datasets")
+liste_dataset : list[str] = os.listdir("./datasets")
 
 # Définition du titre de la sidebar
 st.sidebar.title("Paramètres")
@@ -66,7 +69,7 @@ stats = algo_etude_stats(Q, np.array(P_stats), k)
 valid_button = st.sidebar.button("Faire l'étude avec ces paramètres")
 
 # Définition du graphe
-graph = g.Digraph()
+graph = g.Digraph(format="png")
 # Ajout des sommets qui correspondent à l'ensemble E
 for i in range(len(E)):
     graph.node(E[i], E[i], color=couleurs[i], fillcolor=couleurs[i], style="filled", fontcolor="white")
@@ -80,6 +83,13 @@ for y in range(taille_E):
                 graph.edge(E[y], E[i], label=f"{Q[y][i]}", color="orange")
             else:
                 graph.edge(E[y], E[i], label=f"{Q[y][i]}", color="red")
+
+graph.save("test.dot")
+(graphe,) = pydot.graph_from_dot_file("./test.dot")
+print("ok")
+graphe.write_png("output.png")
+help(pydot.Dot.write)
+
 
 ######## AFFICHAGE ########
 print(graph.source)
